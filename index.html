@@ -241,6 +241,70 @@
     .tools { right:8px; }
     .msg { padding-left:12px; padding-right:12px; }
   }
+
+  /* ── animations ── */
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  @keyframes popIn { from { opacity:0; transform:scale(.93) translateY(8px); } to { opacity:1; transform:none; } }
+  @keyframes msgIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  @keyframes rxPop { 0% { transform:scale(.6); } 60% { transform:scale(1.28); } 100% { transform:scale(1); } }
+  @keyframes slideUp { from { opacity:0; transform:translate(-50%,24px); } to { opacity:1; transform:translate(-50%,0); } }
+  @keyframes barShake { 10%,90% { transform:translateX(calc(-50% - 2px)); } 20%,80% { transform:translateX(calc(-50% + 4px)); } 30%,50%,70% { transform:translateX(calc(-50% - 7px)); } 40%,60% { transform:translateX(calc(-50% + 7px)); } }
+  @keyframes bounce { 0%,60%,100% { transform:translateY(0); opacity:.4; } 30% { transform:translateY(-4px); opacity:1; } }
+  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(46,160,67,.55); } 70% { box-shadow:0 0 0 6px rgba(46,160,67,0); } 100% { box-shadow:0 0 0 0 rgba(46,160,67,0); } }
+  .screen.active { animation:fadeIn .35s ease; }
+  .card { animation:fadeUp .45s cubic-bezier(.2,.8,.2,1); }
+  .overlay { animation:fadeIn .15s ease; }
+  .modal { animation:popIn .22s cubic-bezier(.2,.9,.3,1.1); }
+  .msg.msg-in { animation:msgIn .3s cubic-bezier(.2,.8,.2,1); }
+  .day { animation:fadeIn .3s ease; }
+  .tools { animation:fadeIn .12s ease; }
+  .rx { transition:transform .12s, background .15s, border-color .15s; }
+  .rx:hover { transform:translateY(-1px) scale(1.06); }
+  .rx:active { transform:scale(.92); }
+  .rx.pop { animation:rxPop .32s ease; }
+  .icon-btn:hover { transform:scale(1.12); }
+  .icon-btn:active { transform:scale(.9); }
+  #send-btn:active { transform:translateX(3px) scale(.9); }
+  .btn:active { transform:scale(.97); }
+  .nav { transition:background .12s, padding-left .15s, color .1s; }
+  .nav:hover { padding-left:14px; }
+  .badge, .dot { animation:popIn .2s ease; }
+  .pres.on::after { animation:pulse 2.4s infinite; }
+  #emoji { animation:popIn .15s ease; }
+  #mention-pop { animation:popIn .12s ease; }
+  #lightbox.show { animation:fadeIn .15s ease; }
+  #lightbox.show img { animation:popIn .22s ease; }
+  .emoji-grid .opt { transition:transform .12s, border-color .15s; }
+  .dots { display:inline-flex; margin-left:3px; vertical-align:middle; }
+  .dots i { width:4px; height:4px; border-radius:50%; background:currentColor; margin:0 1.5px; animation:bounce 1.2s infinite; }
+  .dots i:nth-child(2) { animation-delay:.15s; } .dots i:nth-child(3) { animation-delay:.3s; }
+
+  /* ── simple settings ── */
+  .st-avatar { display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:16px; }
+  .st-av-btn { position:relative; width:96px; height:96px; border-radius:50%; border:none; background:none; cursor:pointer; padding:0; transition:transform .15s; }
+  .st-av-btn:hover { transform:scale(1.05); }
+  .st-av-btn .cam { position:absolute; inset:0; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; opacity:0; transition:opacity .15s; }
+  .st-av-btn:hover .cam { opacity:1; }
+  .st-sub { font-size:12px; color:var(--muted); }
+  .st-sub .link-btn { margin:0; }
+  .collapse { max-height:0; overflow:hidden; margin:0; transition:max-height .3s ease, margin .3s ease; }
+  .collapse.open { max-height:220px; margin:0 0 16px; }
+  .seg { display:flex; background:var(--bg3); border-radius:8px; padding:3px; gap:3px; }
+  .seg button { flex:1; padding:7px; border:none; background:none; border-radius:6px; cursor:pointer; color:var(--text2); font-weight:500; transition:all .15s; }
+  .seg button.on { background:var(--bg2); color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,.25); }
+  details.st-more { margin-top:6px; border-top:1px solid var(--border); padding-top:10px; }
+  details.st-more summary { cursor:pointer; color:var(--text2); font-size:13px; padding:4px 0; list-style:none; user-select:none; }
+  details.st-more summary::-webkit-details-marker { display:none; }
+  details.st-more summary::before { content:'▸'; display:inline-block; margin-right:6px; transition:transform .2s; }
+  details.st-more[open] summary::before { transform:rotate(90deg); }
+  details.st-more .inner { padding-top:12px; animation:fadeUp .25s ease; }
+  .savebar { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:9px 10px 9px 18px; display:flex; align-items:center; gap:10px; box-shadow:var(--shadow); white-space:nowrap; animation:slideUp .3s cubic-bezier(.2,.9,.3,1.1); z-index:5; max-width:calc(100vw - 16px); }
+  .savebar.shake { animation:barShake .5s ease; border-color:var(--danger); }
+  .savebar .msg-t { font-size:13px; font-weight:500; }
+  @media (max-width:480px) { .savebar { padding-left:12px; gap:6px; } .savebar .msg-t { font-size:12px; } }
+
+  @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
 </head>
 <body>
@@ -864,7 +928,7 @@ function openChat(k) {
   const p = parseKey(k);
   if (p.type === 'dm' && (!S.users.has(p.id) && S.users.size)) k = 'c:general';
   S.key = k; store.set('sc_last', k);
-  S.msgs.clear(); S.limit = PAGE_SIZE; S.search = ''; $('search').value = ''; S.editing = null; setReply(null);
+  S.msgs.clear(); S.rendered = null; S.limit = PAGE_SIZE; S.search = ''; $('search').value = ''; S.editing = null; setReply(null);
   renderChatHead(); renderChannels(); renderPeople(); loadMessages();
   markRead(k); closeSidebar(); renderTyping();
   if (window.innerWidth > 820) $('msg-input').focus();
@@ -926,6 +990,7 @@ function renderMessages(mode = 'auto') {
         : `<div class="welcome"><h3>${esc(u?.name || 'Direct message')}</h3><p>This is the start of your conversation. ${list.length ? '' : 'Say hi!'}</p></div>`;
     }
   }
+  const animate = S.rendered instanceof Set && !S.keepScroll && !q;   // only animate genuinely new messages
   let lastDay = '', lastUid = null, lastT = 0;
   for (const m of list) {
     const t = tsMs(m.createdAt), day = new Date(t).toDateString();
@@ -937,7 +1002,7 @@ function renderMessages(mode = 'auto') {
     const f = formatText(m.text);
     const src = safeUrl(m.imageUrl);
     const rx = Object.entries(m.reactions || {}).filter(([, a]) => a?.length).map(([e, a]) =>
-      `<button class="rx${a.includes(S.user.uid) ? ' mine' : ''}" data-act="react" data-emoji="${esc(e)}" title="${esc(a.map(id => S.users.get(id)?.name || '?').join(', '))}">${esc(e)}<span>${a.length}</span></button>`).join('');
+      `<button class="rx${a.includes(S.user.uid) ? ' mine' : ''}${S.pop === m.id + '|' + e ? ' pop' : ''}" data-act="react" data-emoji="${esc(e)}" title="${esc(a.map(id => S.users.get(id)?.name || '?').join(', '))}">${esc(e)}<span>${a.length}</span></button>`).join('');
     let reply = '';
     if (m.replyTo) { const ru = S.users.get(m.replyTo.uid);
       reply = `<div class="reply-prev" data-act="jump" data-id="${esc(m.replyTo.id)}"><b style="color:${colorOf(ru)}">${esc(ru?.name || 'Unknown')}</b><span class="rt">${esc(m.replyTo.text || '📷 Image')}</span></div>`; }
@@ -954,7 +1019,7 @@ function renderMessages(mode = 'auto') {
       ${mine && m.text ? `<button class="icon-btn" data-act="edit" title="Edit">${ic('edit')}</button>` : ''}
       ${mine || (isAdmin() && parseKey(S.key).type === 'ch') ? `<button class="icon-btn" data-act="delete" title="Delete">${ic('trash')}</button>` : ''}
     </div>`;
-    html += `<div class="msg${grouped ? ' grouped' : ''}${mention ? ' mention' : ''}${m.pinned ? ' pinned' : ''}" data-id="${esc(m.id)}">
+    html += `<div class="msg${grouped ? ' grouped' : ''}${mention ? ' mention' : ''}${m.pinned ? ' pinned' : ''}${animate && !S.rendered.has(m.id) ? ' msg-in' : ''}" data-id="${esc(m.id)}">
       <div class="col">${grouped ? `<span class="gtime">${esc(fmtTime(t))}</span>` : `<span data-act="profile" data-uid="${esc(m.uid)}" style="cursor:pointer">${avatarHtml(u, 36)}</span>`}</div>
       <div class="body">
         ${grouped ? '' : `<div class="meta"><span class="author" data-act="profile" data-uid="${esc(m.uid)}" style="color:${colorOf(u)}">${esc(u?.name || 'Unknown')}</span>${u?.role === 'admin' ? '<span class="rolebadge">ADMIN</span>' : ''}<span class="time">${esc(fmtTime(t))}</span>${m.pinned ? `<span class="time">📌</span>` : ''}</div>`}
@@ -965,6 +1030,7 @@ function renderMessages(mode = 'auto') {
   }
   if (q && !list.length) html += '<div class="welcome"><p>No matching messages.</p></div>';
   box.innerHTML = html;
+  S.rendered = new Set(S.msgs.keys()); S.pop = null;
   const edTa = box.querySelector('.edit-ta'); if (edTa) { edTa.focus(); edTa.setSelectionRange(edTa.value.length, edTa.value.length); }
   if (S.keepScroll) { box.scrollTop = box.scrollHeight - S.keepScroll.h + S.keepScroll.top; S.keepScroll = null; }
   else if (mode === 'bottom' || (mode === 'auto' && nearBottom)) box.scrollTop = box.scrollHeight;
@@ -1007,7 +1073,10 @@ async function saveEdit(id, text) {
 }
 function toggleReaction(m, emoji) {
   const has = (m.reactions?.[emoji] || []).includes(S.user.uid);
-  updateDoc(doc(colFor(S.key), m.id), { [new FieldPath('reactions', emoji)]: has ? arrayRemove(S.user.uid) : arrayUnion(S.user.uid) }).catch(e => toast(friendlyError(e.code), 'error'));
+  S.pop = m.id + '|' + emoji;
+  // FieldPath must be passed as an argument (it can't be used as an object key — that was the bug).
+  updateDoc(doc(colFor(S.key), m.id), new FieldPath('reactions', emoji), has ? arrayRemove(S.user.uid) : arrayUnion(S.user.uid))
+    .catch(e => { S.pop = null; toast(friendlyError(e.code), 'error'); });
 }
 $('pins-btn').onclick = () => {
   const pins = [...S.msgs.values()].filter(m => m.pinned).sort((a, b) => tsMs(b.createdAt) - tsMs(a.createdAt));
@@ -1024,7 +1093,8 @@ function renderTyping() {
   if (!S.user) return;
   const tk = typingKey(S.key), now = Date.now();
   const who = [...S.users.values()].filter(u => u.uid !== S.user.uid && u.typingIn === tk && now - (u.typingAt || 0) < 5000).map(u => u.name);
-  $('typing').textContent = !who.length ? '' : who.length === 1 ? `${who[0]} is typing…` : who.length === 2 ? `${who[0]} and ${who[1]} are typing…` : 'Several people are typing…';
+  const txt = !who.length ? '' : who.length === 1 ? `${esc(who[0])} is typing` : who.length === 2 ? `${esc(who[0])} and ${esc(who[1])} are typing` : 'Several people are typing';
+  $('typing').innerHTML = txt ? `${txt}<span class="dots"><i></i><i></i><i></i></span>` : '';
 }
 function pingTyping(on) {
   if (!S.user) return; const now = Date.now();
@@ -1165,14 +1235,18 @@ $('emoji-btn').onclick = e => {
 };
 
 /* ════════════════════════════════════════════════════════════ modals */
+let modalGuard = null, modalShake = null;   // settings uses these to block closing while there are unsaved changes
 function openModal(title, bodyHtml, footerHtml = '') {
-  closeModal();
+  closeModal(true);
   const o = document.createElement('div'); o.className = 'overlay'; o.id = 'modal-root';
   o.innerHTML = `<div class="modal"><div class="mh"><span>${esc(title)}</span><button class="icon-btn" data-close>${ic('x')}</button></div><div class="mb">${bodyHtml}</div>${footerHtml ? `<div class="mf">${footerHtml}</div>` : ''}</div>`;
   o.addEventListener('mousedown', e => { if (e.target === o || e.target.closest('[data-close]')) closeModal(); });
   document.body.appendChild(o); return o;
 }
-function closeModal() { $('modal-root')?.remove(); }
+function closeModal(force = false) {
+  if (!force && modalGuard?.()) { modalShake?.(); return false; }
+  modalGuard = null; modalShake = null; $('modal-root')?.remove(); return true;
+}
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); $('emoji').classList.add('hidden'); } });
 function confirmBox(title, msg, okLabel = 'OK') {
   return new Promise(res => {
@@ -1201,58 +1275,99 @@ function showProfile(uid) {
 
 /* ════════════════════════════════════════════════════════════ settings */
 function openSettings() {
-  const me = S.me; let draftAvatar = me.avatar || AVATARS[0], color = /^#[0-9a-f]{6}$/i.test(me.color || '') ? me.color : COLORS[0];
-  const o = openModal('Settings', `
-    <h4>Profile</h4>
-    <div class="prof-head"><span id="st-av">${avatarHtml({ avatar: draftAvatar }, 64)}</span>
-      <div style="flex:1"><div class="row"><button class="btn sm" id="st-upload">Upload PNG / GIF / JPG</button><button class="btn sm" id="st-reset">Reset</button></div>
-      <input type="file" id="st-file" accept="image/*" class="hidden"/>
-      <div class="hint" style="font-size:11px;color:var(--muted);margin-top:4px">Static images are cropped square. GIFs/WebP keep animation if under 250 KB.</div></div></div>
-    <div class="fg"><label>Or pick an emoji</label><div class="emoji-grid" id="st-emojis">${AVATARS.map(a => `<div class="opt" data-a="${a}">${a}</div>`).join('')}</div></div>
-    <div class="fg"><label>Or paste an image/GIF link (https)</label><div class="row"><input type="url" id="st-url" placeholder="https://…/me.gif"/><button class="btn sm" id="st-url-go">Use</button></div></div>
-    <div class="fg"><label>Display name</label><input type="text" id="st-name" maxlength="24" value="${esc(me.name)}"/></div>
-    <div class="fg"><label>Status</label><input type="text" id="st-status" maxlength="60" placeholder="What are you up to?" value="${esc(me.status || '')}"/></div>
-    <div class="fg"><label>About</label><textarea id="st-bio" maxlength="300" placeholder="A short bio (supports **markdown**)">${esc(me.bio || '')}</textarea></div>
-    <div class="fg"><label>Name colour</label><div class="emoji-grid" id="st-colors">${COLORS.map(c => `<div class="opt" data-c="${c}" style="background:${c}"></div>`).join('')}</div></div>
-    <h4>Preferences</h4>
-    <div class="fg"><label>Theme</label><select id="st-theme"><option value="dark">Dark</option><option value="light">Light</option><option value="midnight">Midnight (purple)</option></select></div>
-    <label class="toggle"><span>Sound for DMs &amp; mentions</span><input type="checkbox" id="st-sound"/></label>
-    <label class="toggle"><span>Desktop notifications for DMs &amp; mentions</span><input type="checkbox" id="st-desk"/></label>
-    <label class="toggle"><span>Compact message layout</span><input type="checkbox" id="st-compact"/></label>
-    <label class="toggle"><span>24-hour clock</span><input type="checkbox" id="st-h24"/></label>
-    <h4>Tips</h4>
-    <div style="color:var(--text2);font-size:12px;line-height:1.7">**bold** · *italic* · ~~strike~~ · \`code\` · \`\`\`code block\`\`\` · &gt; quote · ||spoiler|| · @name · /shrug /tableflip /me<br>Paste or drag images into the chat. Press ↑ in an empty box to edit your last message.</div>`,
-    `<button class="btn" id="st-rules">Copy security rules</button><button class="btn danger" id="st-logout">Sign out</button><button class="btn primary" id="st-save">Save</button>`);
-  const q = s => o.querySelector(s);
-  const paintAvatar = () => { q('#st-av').innerHTML = avatarHtml({ avatar: draftAvatar }, 64);
-    o.querySelectorAll('#st-emojis .opt').forEach(x => x.classList.toggle('sel', x.dataset.a === draftAvatar)); };
-  const paintColor = () => o.querySelectorAll('#st-colors .opt').forEach(x => x.classList.toggle('sel', x.dataset.c === color));
-  paintAvatar(); paintColor();
-  q('#st-theme').value = prefs.theme; q('#st-sound').checked = prefs.sound; q('#st-desk').checked = prefs.desktop; q('#st-compact').checked = prefs.compact; q('#st-h24').checked = prefs.h24;
-  q('#st-emojis').onclick = e => { const c = e.target.closest('.opt'); if (c) { draftAvatar = c.dataset.a; paintAvatar(); } };
-  q('#st-colors').onclick = e => { const c = e.target.closest('.opt'); if (c) { color = c.dataset.c; paintColor(); } };
-  q('#st-upload').onclick = () => q('#st-file').click();
-  q('#st-reset').onclick = () => { draftAvatar = AVATARS[0]; paintAvatar(); };
-  q('#st-file').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { draftAvatar = await avatarFromFile(f); paintAvatar(); } catch (err) { toast(err.message, 'error'); } };
-  q('#st-url-go').onclick = () => { const u = q('#st-url').value.trim(); if (!u.startsWith('https://')) return toast('Link must start with https://', 'error'); draftAvatar = u; paintAvatar(); };
-  q('#st-desk').onchange = async e => {
-    if (e.target.checked && 'Notification' in window && Notification.permission !== 'granted') {
-      const p = await Notification.requestPermission(); if (p !== 'granted') { e.target.checked = false; toast('Notifications were blocked by the browser.', 'error'); }
-    } else if (e.target.checked && !('Notification' in window)) { e.target.checked = false; toast('Not supported in this browser.', 'error'); }
+  const me = S.me;
+  const init = {
+    avatar: me.avatar || AVATARS[0], name: me.name || '', status: me.status || '', bio: me.bio || '',
+    color: /^#[0-9a-f]{6}$/i.test(me.color || '') ? me.color : COLORS[0],
+    theme: prefs.theme, sound: !!prefs.sound, desktop: !!prefs.desktop, compact: !!prefs.compact, h24: !!prefs.h24
   };
-  q('#st-theme').onchange = e => { prefs.theme = e.target.value; applyPrefs(); };
+  const d = { ...init };
+  const dirty = () => JSON.stringify(d) !== JSON.stringify(init);
+
+  const o = openModal('Settings', `
+    <div class="st-avatar">
+      <button class="st-av-btn" id="st-av" title="Change picture"><span id="st-av-view"></span><span class="cam">Change</span></button>
+      <input type="file" id="st-file" accept="image/*" class="hidden"/>
+      <div class="st-sub"><button class="link-btn" id="st-emoji-toggle">Pick an emoji</button> · <button class="link-btn" id="st-av-reset">Remove</button></div>
+    </div>
+    <div class="emoji-grid collapse" id="st-emojis">${AVATARS.map(a => `<div class="opt" data-a="${a}">${a}</div>`).join('')}</div>
+    <div class="fg"><label>Name</label><input type="text" id="st-name" maxlength="24"/></div>
+    <div class="fg"><label>Status</label><input type="text" id="st-status" maxlength="60" placeholder="What are you up to?"/></div>
+    <div class="fg"><label>Theme</label>
+      <div class="seg" id="st-theme"><button data-t="dark">Dark</button><button data-t="light">Light</button><button data-t="midnight">Midnight</button></div></div>
+    <details class="st-more"><summary>More options</summary><div class="inner">
+      <div class="fg"><label>About you</label><textarea id="st-bio" maxlength="300" placeholder="A short bio"></textarea></div>
+      <div class="fg"><label>Picture link (https)</label><div class="row"><input type="url" id="st-url" placeholder="https://…/me.gif"/><button class="btn sm" id="st-url-go">Use</button></div></div>
+      <div class="fg"><label>Name colour</label><div class="emoji-grid" id="st-colors">${COLORS.map(c => `<div class="opt" data-c="${c}" style="background:${c}"></div>`).join('')}</div></div>
+      <label class="toggle"><span>Sounds for DMs &amp; mentions</span><input type="checkbox" id="st-sound"/></label>
+      <label class="toggle"><span>Desktop notifications</span><input type="checkbox" id="st-desk"/></label>
+      <label class="toggle"><span>Compact messages</span><input type="checkbox" id="st-compact"/></label>
+      <label class="toggle"><span>24-hour clock</span><input type="checkbox" id="st-h24"/></label>
+      <button class="link-btn" id="st-rules">Copy Firestore security rules</button>
+    </div></details>`,
+    `<button class="btn danger sm" id="st-logout">Sign out</button>`);
+  const q = s => o.querySelector(s);
+
+  // floating "unsaved changes" bar
+  const bar = document.createElement('div'); bar.className = 'savebar hidden';
+  bar.innerHTML = `<span class="msg-t">You have unsaved changes</span><button class="btn sm" id="sb-reset">Reset</button><button class="btn primary sm" id="st-save">Save changes</button>`;
+  o.appendChild(bar);
+  const refresh = () => bar.classList.toggle('hidden', !dirty());
+  const shake = () => { bar.classList.remove('hidden', 'shake'); void bar.offsetWidth; bar.classList.add('shake'); setTimeout(() => bar.classList.remove('shake'), 500); };
+  modalGuard = dirty; modalShake = shake;
+
+  const repaint = () => {
+    q('#st-av-view').innerHTML = avatarHtml({ avatar: d.avatar }, 96);
+    q('#st-emojis').querySelectorAll('.opt').forEach(x => x.classList.toggle('sel', x.dataset.a === d.avatar));
+    q('#st-colors').querySelectorAll('.opt').forEach(x => x.classList.toggle('sel', x.dataset.c === d.color));
+    q('#st-theme').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.t === d.theme));
+    q('#st-name').value = d.name; q('#st-status').value = d.status; q('#st-bio').value = d.bio;
+    q('#st-sound').checked = d.sound; q('#st-desk').checked = d.desktop; q('#st-compact').checked = d.compact; q('#st-h24').checked = d.h24;
+    document.documentElement.dataset.theme = d.theme;   // live theme preview
+    refresh();
+  };
+  repaint();
+
+  q('#st-av').onclick = () => q('#st-file').click();
+  q('#st-file').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { d.avatar = await avatarFromFile(f); repaint(); } catch (err) { toast(err.message, 'error'); } };
+  q('#st-emoji-toggle').onclick = () => q('#st-emojis').classList.toggle('open');
+  q('#st-emojis').onclick = e => { const c = e.target.closest('.opt'); if (c) { d.avatar = c.dataset.a; repaint(); } };
+  q('#st-av-reset').onclick = () => { d.avatar = AVATARS[0]; repaint(); };
+  q('#st-url-go').onclick = () => { const u = q('#st-url').value.trim();
+    if (!u.startsWith('https://')) return toast('Link must start with https://', 'error'); d.avatar = u; repaint(); };
+  q('#st-colors').onclick = e => { const c = e.target.closest('.opt'); if (c) { d.color = c.dataset.c; repaint(); } };
+  q('#st-theme').onclick = e => { const b = e.target.closest('button'); if (b) { d.theme = b.dataset.t; repaint(); } };
+  q('#st-name').oninput = e => { d.name = e.target.value; refresh(); };
+  q('#st-status').oninput = e => { d.status = e.target.value; refresh(); };
+  q('#st-bio').oninput = e => { d.bio = e.target.value; refresh(); };
+  q('#st-sound').onchange = e => { d.sound = e.target.checked; refresh(); };
+  q('#st-compact').onchange = e => { d.compact = e.target.checked; refresh(); };
+  q('#st-h24').onchange = e => { d.h24 = e.target.checked; refresh(); };
+  q('#st-desk').onchange = async e => {
+    if (e.target.checked) {
+      if (!('Notification' in window)) { e.target.checked = false; return toast('Not supported in this browser.', 'error'); }
+      if (Notification.permission !== 'granted') {
+        const p = await Notification.requestPermission();
+        if (p !== 'granted') { e.target.checked = false; toast('Notifications were blocked by the browser.', 'error'); }
+      }
+    }
+    d.desktop = e.target.checked; refresh();
+  };
   q('#st-rules').onclick = () => navigator.clipboard.writeText(RULES).then(() => toast('Rules copied', 'success'));
-  q('#st-logout').onclick = () => { closeModal(); logout(); };
-  q('#st-save').onclick = async () => {
-    const name = q('#st-name').value.trim();
-    if (!name) return toast('Name cannot be empty.', 'error');
-    if (draftAvatar.length > 390000) return toast('Avatar is too large.', 'error');
-    Object.assign(prefs, { theme: q('#st-theme').value, sound: q('#st-sound').checked, desktop: q('#st-desk').checked, compact: q('#st-compact').checked, h24: q('#st-h24').checked });
-    store.set('sc_prefs', prefs); applyPrefs();
+  q('#st-logout').onclick = () => { closeModal(true); applyPrefs(); logout(); };
+  bar.querySelector('#sb-reset').onclick = () => { Object.assign(d, init); repaint(); };
+  bar.querySelector('#st-save').onclick = async e => {
+    const name = d.name.trim();
+    if (!name) { toast('Name cannot be empty.', 'error'); return shake(); }
+    if (d.avatar.length > 390000) return toast('Avatar is too large.', 'error');
+    e.target.disabled = true; e.target.textContent = 'Saving…';
     try {
-      await updateDoc(doc(db, 'users', S.user.uid), { name, avatar: draftAvatar, color, status: q('#st-status').value.trim(), bio: q('#st-bio').value.trim() });
-      toast('Saved', 'success'); closeModal(); renderMessages('keep');
-    } catch (e) { toast(friendlyError(e.code), 'error'); }
+      await updateDoc(doc(db, 'users', S.user.uid), { name, avatar: d.avatar, color: d.color, status: d.status.trim(), bio: d.bio.trim() });
+      Object.assign(prefs, { theme: d.theme, sound: d.sound, desktop: d.desktop, compact: d.compact, h24: d.h24 });
+      store.set('sc_prefs', prefs); applyPrefs();
+      toast('Saved', 'success'); closeModal(true); renderMessages('keep');
+    } catch (err) { toast(friendlyError(err.code), 'error'); e.target.disabled = false; e.target.textContent = 'Save changes'; }
   };
 }
 
